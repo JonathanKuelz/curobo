@@ -88,7 +88,7 @@ args = parser.parse_args()
 ############################################################
 
 # Third Party
-from omni.isaac.kit import SimulationApp
+from isaacsim import SimulationApp
 
 simulation_app = SimulationApp(
     {
@@ -104,8 +104,8 @@ from typing import Dict
 import carb
 import numpy as np
 from helper import add_extensions, add_robot_to_scene
-from omni.isaac.core import World
-from omni.isaac.core.objects import cuboid, sphere
+from isaacsim.core.api import World
+from isaacsim.core.api.objects import cuboid, sphere
 
 ########### OV #################
 from omni.isaac.core.utils.types import ArticulationAction
@@ -276,8 +276,9 @@ def main():
         if articulation_controller is None:
             # robot.initialize()
             articulation_controller = robot.get_articulation_controller()
-        if step_index < 2:
+        if step_index <= 3:
             my_world.reset()
+            my_world.step()
             robot._articulation_view.initialize()
             idx_list = [robot.get_dof_index(x) for x in j_names]
             robot.set_joint_positions(default_config, idx_list)

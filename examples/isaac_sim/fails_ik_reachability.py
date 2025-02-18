@@ -43,7 +43,7 @@ args = parser.parse_args()
 ############################################################
 
 # Third Party
-from omni.isaac.kit import SimulationApp
+from isaacsim import SimulationApp
 
 simulation_app = SimulationApp(
     {
@@ -59,8 +59,8 @@ from typing import Dict
 import carb
 import numpy as np
 from helper import add_extensions, add_robot_to_scene
-from omni.isaac.core import World
-from omni.isaac.core.objects import cuboid, sphere
+from isaacsim.core.api import World
+from isaacsim.core.api.objects import cuboid, sphere
 
 # CuRobo
 from curobo.cuda_robot_model.cuda_robot_model import CudaRobotModel
@@ -112,7 +112,7 @@ def get_pose_grid(n_x, n_y, n_z, max_x, max_y, max_z):
 
 def draw_points(pose, success):
     # Third Party
-    from omni.isaac.debug_draw import _debug_draw
+    from isaacsim.util.debug_draw import _debug_draw
 
     draw = _debug_draw.acquire_debug_draw_interface()
     N = 100
@@ -212,7 +212,7 @@ def main():
     goal_pose = goal_pose.repeat(position_grid_offset.shape[0])
     goal_pose.position += position_grid_offset
 
-    result = ik_solver.solve_batch(goal_pose)
+    # result = ik_solver.solve_batch(goal_pose)
 
     print("Curobo is Ready")
     add_extensions(simulation_app, args.headless_mode)
@@ -237,11 +237,11 @@ def main():
 
         step_index = my_world.current_time_step_index
         # print(step_index)
-        if step_index <= 2:
+        if step_index <= 3:
             my_world.reset()
             idx_list = [robot.get_dof_index(x) for x in j_names]
             robot.set_joint_positions(default_config, idx_list)
-
+            my_world.step(render=True)
             robot._articulation_view.set_max_efforts(
                 values=np.array([5000 for i in range(len(idx_list))]), joint_indices=idx_list
             )

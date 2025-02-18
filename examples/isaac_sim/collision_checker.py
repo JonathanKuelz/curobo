@@ -27,7 +27,7 @@ a = torch.zeros(4, device="cuda:0")
 import argparse
 
 # Third Party
-from omni.isaac.kit import SimulationApp
+from isaacsim import SimulationApp
 
 parser = argparse.ArgumentParser()
 parser.add_argument(
@@ -53,9 +53,9 @@ simulation_app = SimulationApp(
 import carb
 import numpy as np
 from helper import add_extensions
-from omni.isaac.core import World
-from omni.isaac.core.materials import OmniPBR
-from omni.isaac.core.objects import sphere
+from isaacsim.core.api import World
+from isaacsim.core.api.materials import OmniPBR
+from isaacsim.core.api.objects import sphere
 
 # CuRobo
 # from curobo.wrap.reacher.ik_solver import IKSolver, IKSolverConfig
@@ -73,7 +73,7 @@ from curobo.wrap.model.robot_world import RobotWorld, RobotWorldConfig
 
 def draw_line(start, gradient):
     # Third Party
-    from omni.isaac.debug_draw import _debug_draw
+    from isaacsim.util.debug_draw import _debug_draw
 
     draw = _debug_draw.acquire_debug_draw_interface()
     # if draw.get_num_points() > 0:
@@ -194,7 +194,7 @@ def main():
 
         else:
             # Third Party
-            from omni.isaac.debug_draw import _debug_draw
+            from isaacsim.util.debug_draw import _debug_draw
 
             draw = _debug_draw.acquire_debug_draw_interface()
             # if draw.get_num_points() > 0:

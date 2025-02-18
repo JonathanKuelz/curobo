@@ -45,7 +45,7 @@ parser.add_argument(
 parser.add_argument("--robot", type=str, default="franka.yml", help="robot configuration to load")
 args = parser.parse_args()
 # Third Party
-from omni.isaac.kit import SimulationApp
+from isaacsim import SimulationApp
 
 simulation_app = SimulationApp(
     {
@@ -58,12 +58,12 @@ simulation_app = SimulationApp(
 import carb
 import numpy as np
 from helper import add_extensions, add_robot_to_scene
-from omni.isaac.core import World
-from omni.isaac.core.objects import cuboid
+from isaacsim.core.api import World
+from isaacsim.core.api.objects import cuboid
 
 ########### OV #################
 from omni.isaac.core.utils.types import ArticulationAction
-from omni.isaac.kit import SimulationApp
+from isaacsim import SimulationApp
 
 # CuRobo
 # from curobo.wrap.reacher.ik_solver import IKSolver, IKSolverConfig
@@ -186,6 +186,8 @@ def main():
     art_controllers = [r.get_articulation_controller() for r in robot_list]
     cmd_idx = 0
     past_goal = None
+
+    needs_reset = True
     while simulation_app.is_running():
         my_world.step(render=True)
         if not my_world.is_playing():
@@ -205,7 +207,12 @@ def main():
                     values=np.array([5000 for i in range(len(idx_list))]), joint_indices=idx_list
                 )
         if step_index < 20:
+            if needs_reset:
+                my_world.reset()
+                needs_reset = False
             continue
+
+        needs_reset = True
         sp_buffer = []
         sq_buffer = []
         for k in target_list:

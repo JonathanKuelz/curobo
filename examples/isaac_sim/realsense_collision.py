@@ -26,7 +26,7 @@ import numpy as np
 import torch
 from matplotlib import cm
 from nvblox_torch.datasets.realsense_dataset import RealsenseDataloader
-from omni.isaac.kit import SimulationApp
+from isaacsim import SimulationApp
 
 simulation_app = SimulationApp(
     {
@@ -49,9 +49,9 @@ simulation_app.update()
 import argparse
 
 # Third Party
-from omni.isaac.core import World
-from omni.isaac.core.materials import OmniPBR
-from omni.isaac.core.objects import cuboid, sphere
+from isaacsim.core.api import World
+from isaacsim.core.api.materials import OmniPBR
+from isaacsim.core.api.objects import cuboid, sphere
 
 parser = argparse.ArgumentParser()
 
@@ -68,7 +68,7 @@ def draw_points(voxels):
     # Third Party
 
     # Third Party
-    from omni.isaac.debug_draw import _debug_draw
+    from isaacsim.util.debug_draw import _debug_draw
 
     draw = _debug_draw.acquire_debug_draw_interface()
     # if draw.get_num_points() > 0:
@@ -125,7 +125,7 @@ def clip_camera(camera_data):
 
 def draw_line(start, gradient):
     # Third Party
-    from omni.isaac.debug_draw import _debug_draw
+    from isaacsim.util.debug_draw import _debug_draw
 
     draw = _debug_draw.acquire_debug_draw_interface()
     # if draw.get_num_points() > 0:
@@ -270,7 +270,7 @@ if __name__ == "__main__":
             draw_line(sph_position, d_vec[..., :3].view(3).cpu().numpy())
         else:
             # Third Party
-            from omni.isaac.debug_draw import _debug_draw
+            from isaacsim.util.debug_draw import _debug_draw
 
             draw = _debug_draw.acquire_debug_draw_interface()
             # if draw.get_num_points() > 0:

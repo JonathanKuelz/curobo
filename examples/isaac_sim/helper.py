@@ -15,10 +15,10 @@ from typing import Dict, List
 # Third Party
 import numpy as np
 from matplotlib import cm
-from omni.isaac.core import World
-from omni.isaac.core.materials import OmniPBR
-from omni.isaac.core.objects import cuboid
-from omni.isaac.core.robots import Robot
+from isaacsim.core.api import World
+from isaacsim.core.api.materials import OmniPBR
+from isaacsim.core.api.objects import cuboid
+from isaacsim.core.api.robots import Robot
 from pxr import UsdPhysics
 
 # CuRobo
@@ -28,7 +28,7 @@ from curobo.util.usd_helper import set_prim_transform
 ISAAC_SIM_23 = False
 try:
     # Third Party
-    from omni.isaac.urdf import _urdf  # isaacsim 2022.2
+    from isaacsim.asset.importer.urdf import _urdf  # isaacsim 2022.2
 except ImportError:
     # Third Party
     from omni.importer.urdf import _urdf  # isaac sim 2023.1 or above

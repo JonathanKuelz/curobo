@@ -25,14 +25,14 @@ import torch
 a = torch.zeros(4, device="cuda:0")
 
 # Third Party
-from omni.isaac.kit import SimulationApp
+from isaacsim import SimulationApp
 
 simulation_app = SimulationApp({"headless": True})
 # Third Party
-from omni.isaac.core import World
-from omni.isaac.core.robots import Robot
-from omni.isaac.core.utils.nucleus import get_assets_root_path as nucleus_path
-from omni.isaac.core.utils.stage import add_reference_to_stage
+from isaacsim.core.api import World
+from isaacsim.core.api.robots import Robot
+from isaacsim.core.api.utils.nucleus import get_assets_root_path as nucleus_path
+from isaacsim.core.api.utils.stage import add_reference_to_stage
 
 # CuRobo
 from curobo.util.usd_helper import UsdHelper

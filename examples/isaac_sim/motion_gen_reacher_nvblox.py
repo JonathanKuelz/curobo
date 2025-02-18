@@ -45,7 +45,7 @@ args = parser.parse_args()
 ############################################################
 
 # Third Party
-from omni.isaac.kit import SimulationApp
+from isaacsim import SimulationApp
 
 simulation_app = SimulationApp(
     {
@@ -79,8 +79,8 @@ ext_list = [
 import carb
 import numpy as np
 from helper import add_extensions, add_robot_to_scene
-from omni.isaac.core import World
-from omni.isaac.core.objects import cuboid, sphere
+from isaacsim.core.api import World
+from isaacsim.core.api.objects import cuboid, sphere
 
 ########### OV #################
 from omni.isaac.core.utils.types import ArticulationAction

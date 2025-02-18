@@ -23,7 +23,7 @@ import torch
 a = torch.zeros(4, device="cuda:0")
 
 # Third Party
-from omni.isaac.kit import SimulationApp
+from isaacsim import SimulationApp
 
 simulation_app = SimulationApp(
     {
@@ -57,9 +57,9 @@ import argparse
 # Third Party
 import carb
 from helper import VoxelManager, add_robot_to_scene
-from omni.isaac.core import World
-from omni.isaac.core.materials import OmniPBR
-from omni.isaac.core.objects import cuboid, sphere
+from isaacsim.core.api import World
+from isaacsim.core.api.materials import OmniPBR
+from isaacsim.core.api.objects import cuboid, sphere
 from omni.isaac.core.utils.types import ArticulationAction
 
 # CuRobo
@@ -98,7 +98,7 @@ def draw_rollout_points(rollouts: torch.Tensor, clear: bool = False):
     import random
 
     # Third Party
-    from omni.isaac.debug_draw import _debug_draw
+    from isaacsim.util.debug_draw import _debug_draw
 
     draw = _debug_draw.acquire_debug_draw_interface()
     N = 100
@@ -124,7 +124,7 @@ def draw_points(voxels):
     # Third Party
 
     # Third Party
-    from omni.isaac.debug_draw import _debug_draw
+    from isaacsim.util.debug_draw import _debug_draw
 
     draw = _debug_draw.acquire_debug_draw_interface()
     # if draw.get_num_points() > 0:
@@ -171,7 +171,7 @@ def clip_camera(camera_data):
 
 def draw_line(start, gradient):
     # Third Party
-    from omni.isaac.debug_draw import _debug_draw
+    from isaacsim.util.debug_draw import _debug_draw
 
     draw = _debug_draw.acquire_debug_draw_interface()
     # if draw.get_num_points() > 0:

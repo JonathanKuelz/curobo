@@ -52,7 +52,7 @@ parser.add_argument(
 args = parser.parse_args()
 
 # Third Party
-from omni.isaac.kit import SimulationApp
+from isaacsim import SimulationApp
 
 simulation_app = SimulationApp(
     {
@@ -67,9 +67,9 @@ from typing import Optional
 # Third Party
 import carb
 from helper import add_extensions
-from omni.isaac.core import World
-from omni.isaac.core.controllers import BaseController
-from omni.isaac.core.tasks import Stacking as BaseStacking
+from isaacsim.core.api import World
+from isaacsim.core.api.controllers import BaseController
+from isaacsim.core.api.tasks import Stacking as BaseStacking
 from omni.isaac.core.utils.prims import is_prim_path_valid
 from omni.isaac.core.utils.stage import get_stage_units
 from omni.isaac.core.utils.string import find_unique_string_name

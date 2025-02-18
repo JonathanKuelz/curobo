@@ -20,7 +20,7 @@ import torch
 
 a = torch.zeros(4, device="cuda:0")
 # Third Party
-from omni.isaac.kit import SimulationApp
+from isaacsim import SimulationApp
 
 simulation_app = SimulationApp(
     {
@@ -57,9 +57,10 @@ import argparse
 
 # Third Party
 import carb
-from omni.isaac.core import World
-from omni.isaac.core.materials import OmniGlass, OmniPBR
-from omni.isaac.core.objects import cuboid, sphere
+from isaacsim.core.api import World
+from isaacsim.core.api.materials import OmniGlass, OmniPBR
+from isaacsim.core.api.objects import cuboid, sphere
+from omni.isaac.core.utils.types import ArticulationAction
 from omni.isaac.core.utils.types import ArticulationAction
 
 # CuRobo
@@ -195,6 +196,7 @@ if __name__ == "__main__":
     plan_idx = 0
     cmd_step_idx = 0
     pose_cost_metric = None
+
     while simulation_app.is_running():
         my_world.step(render=True)
 
@@ -207,7 +209,7 @@ if __name__ == "__main__":
             continue
         step_index = my_world.current_time_step_index
 
-        if step_index <= 2:
+        if step_index <= 3:
             my_world.reset()
             idx_list = [robot.get_dof_index(x) for x in j_names]
             robot.set_joint_positions(default_config, idx_list)
@@ -215,6 +217,7 @@ if __name__ == "__main__":
             robot._articulation_view.set_max_efforts(
                 values=np.array([5000 for i in range(len(idx_list))]), joint_indices=idx_list
             )
+            my_world.step(render=True)
 
         if False and step_index % 50 == 0.0:  # No obstacle update
             obstacles = usd_help.get_obstacles_from_stage(

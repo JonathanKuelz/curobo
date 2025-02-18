@@ -26,7 +26,7 @@ a = torch.zeros(4, device="cuda:0")
 import argparse
 
 # Third Party
-from omni.isaac.kit import SimulationApp
+from isaacsim import SimulationApp
 
 parser = argparse.ArgumentParser()
 
@@ -56,8 +56,8 @@ simulation_app = SimulationApp(
 import carb
 import numpy as np
 from helper import add_extensions, add_robot_to_scene
-from omni.isaac.core import World
-from omni.isaac.core.objects import sphere
+from isaacsim.core.api import World
+from isaacsim.core.api.objects import sphere
 
 # CuRobo
 from curobo.cuda_robot_model.cuda_robot_model import CudaRobotModel
